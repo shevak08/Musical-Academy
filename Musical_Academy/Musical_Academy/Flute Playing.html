@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flute Playing</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .container {
+            background-image: linear-gradient(90deg, #0093E9, #80D0C7);
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align items at the start */
+            padding-top: 2rem; /* Add padding at the top */
+        }
+
+        .intro-container {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 4rem; /* Add some space below the text */
+        }
+
+        .flute-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem; /* Gap of 2rem to create space between each flute hole */
+            margin-top: 1rem;
+            padding: 2rem; /* Add padding for inner spacing */
+            background: radial-gradient(circle, #fff700 0%, #f5e000 100%); /* Radial gradient background in yellow */
+            border-radius: 50px; /* Rounded corners to create a cylindrical effect */
+            border: 2px solid #b59b00; /* Border to highlight the shape in a contrasting yellow */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        }
+
+        .flute-key {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Green curved box */
+       .green-box {
+    width: 2rem;
+    height: 2rem;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-right: 50px solid #4CAF50;  /* This will create the triangle pointing to the left */
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+        /* Hover effects */
+        .flute-key:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+            background-color: #eee;
+        }
+
+        @media screen and (max-width: 768px) {
+            .flute-key{
+                width: 4rem;
+                height: 4rem;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .flute-key{
+                width: 3.5rem;
+                height: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="intro-container">
+            <h1>Flute</h1>
+            <h3>Click on the flute holes below to play the flute notes.</h3>
+        </div>
+        <div class="flute-container">
+            <!-- Dynamically create flute holes and green curved box -->
+                        <div class="green-box"  style="margin-right: 1rem;"></div>
+            <div class="flute-key" data-key="01" style="margin-right: 11rem;"></div>
+            <div class="flute-key" data-key="02" style="margin-right: -1rem;"></div>
+            <div class="flute-key" data-key="03" style="margin-right: -1rem;"></div>
+            <div class="flute-key" data-key="04" style="margin-right: 2rem;"></div>
+            <div class="flute-key" data-key="05" style="margin-right: -1rem;"></div>
+            <div class="flute-key" data-key="06" style="margin-right: -1rem;"></div>
+            <div class="flute-key" data-key="07" style="margin-right: 3rem;"></div>
+            <div class="flute-key" data-key="08"></div>
+        </div>
+    </div>
+
+    <script>
+        // Select all flute keys
+        const fluteKeys = document.querySelectorAll('.flute-key');
+
+        fluteKeys.forEach((key) => {
+            key.addEventListener('click', (e) => {
+                // Get the `data-key` value
+                const clickedKey = e.target.dataset.key;
+
+                // Set audio source dynamically
+                const fluteSound = new Audio(`./FluteSounds/note${clickedKey}.wav`);
+                fluteSound.play();
+
+                // Temporary color change for a click effect
+                e.target.style.backgroundColor = '#999';
+                setTimeout(() => {
+                    e.target.style.backgroundColor = '#ccc';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
